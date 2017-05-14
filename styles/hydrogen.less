@@ -4,11 +4,9 @@
 // for a full listing of what's available.
 @import "ui-variables";
 @import "syntax-variables";
-
 // -------------- Colors ------------------
 @hydrogen-light-background: fadein(lighten(@syntax-background-color, 40%), 100%);
 @hydrogen-dark-background: fadein(lighten(@syntax-background-color, 10%), 100%);
-
 @hydrogen-inline-background: contrast(@syntax-text-color, @hydrogen-dark-background, @hydrogen-light-background, 20%);
 @hydrogen-inline-color: lighten(@syntax-text-color, 10%);
 @hydrogen-error-color: average(@syntax-text-color, red);
@@ -18,123 +16,134 @@
 }
 
 .hydrogen {
+  // -------------- Globals -----------------
+  code {
+    background: inherit;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0.0;
+    white-space: pre;
+  }
 
-// -------------- Globals -----------------
-code {
-  color: inherit;
-  background: inherit;
-  font-size: inherit;
-  font-family: inherit;
-  padding: 0;
-  white-space: pre;
-}
-
-img {
+  img {
     background-color: white;
-}
+  }
 
-img, svg, video, audio {
-  display: block;
-}
+  audio,
+  img,
+  svg,
+  video {
+    display: block;
+  }
 
-td, th {
+  td,
+  th {
     border: 1px solid average(@syntax-text-color, @base-border-color);
     padding: 0.35em 0.7em;
-}
+  }
 
-svg:first-child {
-  background-color: white;
-}
+  svg:first-child {
+    background-color: white;
+  }
 
-.MathJax_SVG_Display {
-    margin: 0;
-}
+  .MathJax_SVG_Display {
+    margin: 0.0;
+  }
 
-.MathJax_SVG {
+  .MathJax_SVG {
     .noError {
-        padding: 0;
-        border: none;
-        color: @hydrogen-error-color
+      border: 0.0;
+      color: @hydrogen-error-color;
+      padding: 0.0;
     }
+
     svg {
-        background-color: unset;
-        margin: 0 !important;
-        display: inline;
+      background-color: unset;
+      display: inline;
+      margin: 0.0;
     }
-}
+  }
 
-.nteract-display-area-stderr {
-  color: @hydrogen-error-color;
-}
+  .nteract-display-area-stderr {
+    color: @hydrogen-error-color;
+  }
+  // ----------- Inline Output --------------
 
-// ----------- Inline Output --------------
-.inline-container {
-  color: @hydrogen-inline-color;
-  background: @hydrogen-inline-background;
-  border-radius: @component-border-radius;
-  box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
-}
+  .inline-container {
+    background: @hydrogen-inline-background;
+    border-radius: @component-border-radius;
+    box-shadow: 0.0 0.0 3px 0.0 rgba(0, 0, 0, 0.3);
+    color: @hydrogen-inline-color;
+  }
 
-.inline-container .cell_display {
-  padding: 0 0.25em 0 0.25em;
-}
+  .inline-container .cell_display {
+    padding: 0.0 0.25em;
+  }
 
-.inline-container.icon::before {
-  text-align: center;
-  font-size: 80%;
-  width: 1.2em;
-  margin: 0;
-}
+  .inline-container.icon::before {
+    font-size: 80%;
+    margin: 0.0;
+    text-align: center;
+    width: 1.2em;
+  }
+  // ---------- Multiline Output ------------
 
-// ---------- Multiline Output ------------
+  .multiline-container {
+    background-color: @background-color-highlight;
+    border: solid 1px @base-border-color;
+    border-color: @hydrogen-inline-background;
+    border-style: outset;
+    display: flex;
+    max-height: calc(~'100% - 2px' - @font-size + 2 * @component-padding);
+    overflow-y: auto;
+    padding: @component-padding;
+    text-color: @hydrogen-inline-background;
+  }
 
-.multiline-container {
-  display: flex;
-  border: solid 1px @base-border-color;
-}
+  .multiline-container .cell_display {
+    background-color: @hydrogen-inline-background;
+    padding: @component-padding;
+  }
 
-.multiline-container .cell_display {
-  padding: @component-padding;
-}
+  .multiline-container .toolbar {
+    border-left: solid 1px @base-border-color;
+    display: flex;
+    flex-direction: column;
+  }
 
-.multiline-container .toolbar {
-  border-left: solid 1px @base-border-color;
-  display: flex;
-  flex-direction: column;
-}
+  .multiline-container .toolbar > :not(:first-child) {
+    border-top: solid 0.5px @base-border-color;
+  }
 
-.multiline-container .toolbar > :not(:first-child) {
-  border-top: solid 1px @base-border-color;
-}
+  .multiline-container .toolbar .icon::before {
+    cursor: pointer;
+    height: 2.5em;
+    line-height: 2.5em;
+    margin: 0.0;
+    text-align: center;
+    width: 2.5em;
+  }
 
-.multiline-container .toolbar .icon::before {
-  text-align: center;
-  margin: 0;
-  width: 2.5em;
-  line-height: 2.5em;
-  height: 2.5em;
-  cursor: pointer;
-}
+  .multiline-container .toolbar .icon:hover {
+    background-color: @background-color-highlight;
+  }
+  // -------------- Spinner -----------------
 
-.multiline-container .toolbar .icon:hover {
-  color: @hydrogen-inline-color;
-}
-
-// -------------- Spinner -----------------
-.spinner {
-    padding: 0 0.5em 0 0.5em;
+  .spinner {
+    padding: 0.0 0.5em;
 
     div {
-      background-color: @hydrogen-inline-color;
-      height: 100%;
-      width: 2px;
-      display: inline-block;
-      margin-left: 1px;
       animation: stretchdelay 1.2s infinite ease-in-out;
+      background-color: @hydrogen-inline-color;
+      display: inline-block;
+      height: 100%;
+      margin-left: 1px;
+      width: 2px;
     }
 
     .rect1 {
-      margin-left: 0px;
+      margin-left: 0.0;
     }
 
     .rect2 {
@@ -142,7 +151,7 @@ svg:first-child {
     }
 
     .rect3 {
-      animation-delay: -1.0s;
+      animation-delay: -1s;
     }
 
     .rect4 {
@@ -152,38 +161,47 @@ svg:first-child {
     .rect5 {
       animation-delay: -0.8s;
     }
-}
+  }
 
-@keyframes stretchdelay {
-  0%, 40%, 100% { transform: scaleY(0.32);}
-  20% { transform: scaleY(0.8); }
-}
+  @keyframes stretchdelay {
+    0%,
+    100%,
+    40% {
+      transform: scaleY(0.32);
+    }
+
+    20% {
+      transform: scaleY(0.8);
+    }
+  }
+
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 .hydrogen.input-view {
-    .label {
-        padding-bottom: @component-padding;
-    }
+  .label {
+    padding-bottom: @component-padding;
+  }
 }
 
+// ---------- Inspector Output ------------
 .hydrogen-panel-body {
-  padding: @component-padding;
-  overflow-y: auto;
+  background-color: @base-background-color;
+  border-color: @hydrogen-inline-background;
+  border-style: outset;
   max-height: calc(~'100% - 2px' - @font-size + 2 * @component-padding);
+  overflow-y: auto;
+  padding: @component-padding;
+  text-color: @hydrogen-inline-background;
 
-  span[style] {
-      color: @text-color-info !important;
-  }
   code {
-    color: inherit;
-    white-space: pre;
-    padding: 0px;
-    font-size: @font-size;
-    font-family: inherit;
     background: inherit;
+    color: inherit;
+    font-family: inherit;
+    font-size: @font-size;
+    white-space: pre;
   }
 }
